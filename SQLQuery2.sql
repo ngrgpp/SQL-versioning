@@ -4,10 +4,6 @@ AS (
 		,d.NumAtCard
 		,r.OpenCreQty nmatr
 		,'noi' AS lato
-	--,r.DocEntry
-	--,r.LineNum
-	--,d.DocNum
-	--,d.TaxDate
 	FROM PDN1 r
 	JOIN OPDN d ON d.DocEntry = r.DocEntry
 	JOIN OITM a ON r.ItemCode = a.ItemCode
@@ -21,10 +17,6 @@ AS (
 		,d.NumAtCard
 		,sum(r.OpenCreQty) AS nmatr
 		,'noi' AS lato
-	--,r.DocEntry
-	--,r.LineNum
-	--,d.DocNum
-	--,d.TaxDate
 	FROM PDN1 r
 	JOIN OPDN d ON d.DocEntry = r.DocEntry
 	JOIN OITM a ON r.ItemCode = a.ItemCode
@@ -50,11 +42,8 @@ SELECT l.*
 FROM loro l
 FULL OUTER JOIN noi n ON l.itemcode = n.ItemCode
 	AND l.numatcard = n.NumAtCard
---AND l.nmatr = n.nmatr
 WHERE (
 		isnull(l.nmatr, 0) - isnull(n.nmatr, 0) <> 0
-		--		l.itemcode IS NULL
-		--		OR n.ItemCode IS NULL
 		)
 	AND (
 		l.itemcode = '18182200'

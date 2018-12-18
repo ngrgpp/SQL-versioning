@@ -38,13 +38,13 @@ AS (
 	)
 SELECT l.*
 	,n.*
-	,isnull(l.nmatr, 0) - isnull(n.nmatr, 0) AS 'to do on SAP',LEFT(n.numatcard, CHARINDEX(' ',n.numatcard)),right(n.numatcard, CHARINDEX(' ',n.numatcard))
+	,isnull(l.nmatr, 0) - isnull(n.nmatr, 0) AS 'to do on SAP'
+	,LEFT(n.numatcard, CHARINDEX(' ', n.numatcard))
+	,right(n.numatcard, CHARINDEX(' ', n.numatcard))
 FROM loro l
 FULL OUTER JOIN noi n ON l.itemcode = n.ItemCode
 	AND l.numatcard = n.NumAtCard
-WHERE (
-		isnull(l.nmatr, 0) - isnull(n.nmatr, 0) <> 0
-		)
+WHERE (isnull(l.nmatr, 0) - isnull(n.nmatr, 0) <> 0)
 	AND (
 		l.itemcode = '18182200'
 		OR n.ItemCode = '18182200'
